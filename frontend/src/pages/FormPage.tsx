@@ -201,9 +201,9 @@ export function FormPage({ onLogout }: FormPageProps) {
                 Anterior
               </Button>
 
-              <div className="flex gap-2 items-center">
+              <div className="flex flex-col items-end gap-1 sm:flex-row sm:items-center sm:gap-2">
                 {genError && (
-                  <p className="text-sm text-red-500">{genError}</p>
+                  <p className="text-sm text-red-500 text-right max-w-xs sm:text-left">{genError}</p>
                 )}
 
                 {currentStep < STEPS.length ? (

@@ -52,23 +52,27 @@ function SalidasAdmin() {
         Gastos fijos del mes. Solo completá los que aplican.
       </p>
       {CONCEPTOS_ADMIN.map((concepto, i) => (
-        <div key={i} className="flex items-center gap-3">
-          <span className="text-sm text-slate-600 w-56 flex-shrink-0">
-            {concepto || <span className="italic text-slate-400">Otro</span>}
+        <div key={i} className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
+          <span className="text-xs font-medium text-slate-500 sm:text-sm sm:text-slate-600 sm:w-56 sm:flex-shrink-0">
+            {concepto || <span className="italic">Otro</span>}
           </span>
-          <Input
-            {...register(`salidas_admin.${i}.fecha`)}
-            type="date"
-            className="w-36 text-xs"
-          />
-          <Input
-            {...register(`salidas_admin.${i}.valor`, { valueAsNumber: true })}
-            type="number"
-            min={0}
-            placeholder="$0"
-            className="w-32 text-xs"
-            error={errors.salidas_admin?.[i]?.valor?.message}
-          />
+          <div className="flex gap-2">
+            <div className="flex-1 min-w-0">
+              <Input
+                {...register(`salidas_admin.${i}.fecha`)}
+                type="date"
+                className="w-full text-xs"
+              />
+            </div>
+            <Input
+              {...register(`salidas_admin.${i}.valor`, { valueAsNumber: true })}
+              type="number"
+              min={0}
+              placeholder="$0"
+              className="w-24 text-xs sm:w-32"
+              error={errors.salidas_admin?.[i]?.valor?.message}
+            />
+          </div>
         </div>
       ))}
     </div>
@@ -98,14 +102,14 @@ function Salidas1008() {
       </Field>
 
       {/* OBOLO — fixed */}
-      <div className="flex items-center gap-3 rounded-lg border border-violet-200 bg-violet-50 p-3">
-        <span className="text-sm font-medium text-violet-700 w-56 flex-shrink-0">ÓBOLO</span>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3 rounded-lg border border-violet-200 bg-violet-50 p-3">
+        <span className="text-sm font-medium text-violet-700 sm:w-56 sm:flex-shrink-0">ÓBOLO</span>
         <Input
           {...register("salidas_1008.0.valor", { valueAsNumber: true })}
           type="number"
           min={0}
           placeholder="$0"
-          className="w-32 text-xs"
+          className="w-full sm:w-32 text-xs"
           error={errors.salidas_1008?.[0]?.valor?.message}
         />
         <input type="hidden" {...register("salidas_1008.0.concepto")} value="OBOLO" />

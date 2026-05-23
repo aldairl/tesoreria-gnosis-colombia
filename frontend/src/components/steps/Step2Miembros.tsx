@@ -42,7 +42,7 @@ export function Step2Miembros() {
       nombre: "",
       cedula: "" as unknown as number,
       aportes: "" as unknown as number,
-      num_cuotas: 1,
+      num_cuotas: "" as unknown as number,
       fecha_recibo: "",
       num_recibo: suggestReceiptNumber(),
       cuentas_varias: [],
@@ -71,9 +71,9 @@ export function Step2Miembros() {
       )}
 
       {fields.length > 0 && (
-        <div className="flex items-center gap-2 px-4 py-1">
+        <div className="hidden sm:flex items-center gap-2 px-4 py-1">
           <span className="w-5" />
-          <div className="flex-1 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="flex-1 grid sm:grid-cols-4 gap-3">
             {["Apellido(s) Nombre(s)", "N° Cédula", "Aportes ($)", "N° Cuotas"].map((label, i) => (
               <span key={label} className="text-xs font-medium text-slate-400">
                 {label}
@@ -81,8 +81,10 @@ export function Step2Miembros() {
               </span>
             ))}
           </div>
-          <span className="w-8" />
-          <span className="w-6" />
+          <div className="flex gap-1 shrink-0">
+            <span className="w-6 h-6" />
+            <span className="w-6 h-6" />
+          </div>
         </div>
       )}
 
@@ -97,11 +99,11 @@ export function Step2Miembros() {
               className="rounded-lg border border-slate-200 bg-white overflow-hidden"
             >
               {/* Row header */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-slate-50">
-                <span className="text-xs font-mono text-slate-400 w-5">
+              <div className="flex items-start gap-2 px-4 py-3 bg-slate-50 sm:items-center">
+                <span className="text-xs font-mono text-slate-400 w-5 shrink-0 pt-2 sm:pt-0">
                   {idx + 1}
                 </span>
-                <div className="flex-1 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div className="flex-1 min-w-0 grid grid-cols-1 gap-2 sm:grid-cols-4 sm:gap-3">
                   <Input
                     {...register(`miembros.${idx}.nombre`)}
                     placeholder="Apellido(s) Nombre(s)"
@@ -137,28 +139,30 @@ export function Step2Miembros() {
                     className="text-xs"
                   />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => toggleExpand(idx)}
-                  className="p-1 text-slate-400 hover:text-slate-600 rounded"
-                  title="Datos del recibo"
-                >
-                  {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => remove(idx)}
-                  className="p-1 text-red-400 hover:text-red-600 rounded"
-                  title="Eliminar miembro"
-                >
-                  <Trash2 size={16} />
-                </button>
+                <div className="flex shrink-0 gap-1">
+                  <button
+                    type="button"
+                    onClick={() => toggleExpand(idx)}
+                    className="p-1 text-slate-400 hover:text-slate-600 rounded"
+                    title="Datos del recibo"
+                  >
+                    {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => remove(idx)}
+                    className="p-1 text-red-400 hover:text-red-600 rounded"
+                    title="Eliminar miembro"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
               </div>
 
               {/* Expanded: recibo + cuentas varias */}
               {expanded && (
                 <div className="px-4 py-4 border-t border-slate-100 flex flex-col gap-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <Field
                       label="Fecha del recibo"
                       error={err?.fecha_recibo?.message}

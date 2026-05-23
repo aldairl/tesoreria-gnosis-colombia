@@ -125,7 +125,7 @@ export function Step5DatosFinales() {
           Cuadre de Caja (Formato 1004)
         </h3>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label="Recibo desde" error={cc?.recibo_desde?.message} required>
             <Input
               {...register("cuadre_caja.recibo_desde", { valueAsNumber: true })}

@@ -24,14 +24,14 @@ export function Step3OtrasEntradas() {
 
       {/* OBOLO — fixed first item */}
       <div className="rounded-lg border border-violet-200 bg-violet-50 p-4">
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-medium text-violet-700 w-32">ÓBOLO</span>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+          <span className="text-sm font-medium text-violet-700 sm:w-32">ÓBOLO</span>
           <Input
             {...register("otras_entradas.0.valor", { valueAsNumber: true })}
             type="number"
             min={0}
             placeholder="$0"
-            className="w-36"
+            className="w-full sm:w-36"
             error={errors.otras_entradas?.[0]?.valor?.message}
           />
           {/* Hidden concept field */}
