@@ -45,9 +45,10 @@ def authenticate(credentials: LoginRequest) -> TokenResponse:
             detail="Server not configured",
         )
 
-    if credentials.username != expected_user or not verify_password(
-        credentials.password, expected_hash
-    ):
+    username = credentials.username.strip()
+    password = credentials.password.strip()
+
+    if username != expected_user or not verify_password(password, expected_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials",
