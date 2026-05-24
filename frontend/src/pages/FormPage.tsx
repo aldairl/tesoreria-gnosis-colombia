@@ -3,6 +3,7 @@ import { type FieldErrors, FormProvider, useForm, useWatch } from "react-hook-fo
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Download, FileSpreadsheet, LogOut } from "lucide-react";
 import { generateExcel, clearToken } from "@/api/client";
+import { useFormPersist } from "@/hooks/useFormPersist";
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, cn } from "@/components/ui";
 import { Step1Organizacion } from "@/components/steps/Step1Organizacion";
 import { Step2Miembros } from "@/components/steps/Step2Miembros";
@@ -82,6 +83,8 @@ export function FormPage({ onLogout }: FormPageProps) {
     mode: "onBlur",
   });
 
+  const { clearDraft } = useFormPersist(methods);
+
   // Mirror obolo from Otras Entradas → Salidas 1008 (same amount, business rule)
   const oboloEntrada = useWatch({ control: methods.control, name: "otras_entradas.0.valor" }) as number;
   useEffect(() => {
@@ -95,6 +98,9 @@ export function FormPage({ onLogout }: FormPageProps) {
     setGenError("");
     try {
       await generateExcel(toApiPayload(data));
+      clearDraft();
+      methods.reset(buildDefaultValues());
+      setCurrentStep(1);
     } catch (e) {
       setGenError(e instanceof Error ? e.message : "Error al generar");
     } finally {
@@ -118,6 +124,7 @@ export function FormPage({ onLogout }: FormPageProps) {
   }
 
   function handleLogout() {
+    clearDraft();
     clearToken();
     onLogout();
   }

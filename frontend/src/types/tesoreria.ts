@@ -100,12 +100,18 @@ export const DIOCESIS_LIST = [
 ] as const;
 
 export const SANTUARIOS_LIST = [
-  { nombre: "MICHAEL", codigo: 7 },
-  { nombre: "YOD-HE-VAV-HE", codigo: 8 },
-  { nombre: "LAKSHMI", codigo: 9 },
-  { nombre: "RAMZU", codigo: 10 },
-  { nombre: "MELQUISEDEC", codigo: 11 },
-  { nombre: "URIEL-VENUS", codigo: 12 },
+  { nombre: "ANGEL ADONAI", codigo: 1 },
+  { nombre: "KRISTON", codigo: 2 },
+  { nombre: "IOD HE VAU HE", codigo: 3 },
+  { nombre: "MELQUISEDEC", codigo: 4 },
+  { nombre: "RAMZU", codigo: 5 },
+  { nombre: "CHOMACK", codigo: 6 },
+  { nombre: "TAHUIL", codigo: 7 },
+  { nombre: "URIEL VENUS", codigo: 8 },
+  { nombre: "MICHAEL", codigo: 9 },
+  { nombre: "LAKHSMI", codigo: 10 },
+  { nombre: "STELLA MARIS", codigo: 11 },
+  { nombre: "VM ARON", codigo: 12 },
 ] as const;
 
 export const CONCEPTOS_ADMIN = [
