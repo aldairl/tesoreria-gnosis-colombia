@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button, Field, Input } from "@/components/ui";
+import { Resumen1008Preview } from "@/components/Resumen1008Preview";
 import type { TesoreríaFormValues } from "@/types/tesoreria";
 
 export function Step5DatosFinales() {
@@ -117,6 +118,14 @@ export function Step5DatosFinales() {
         >
           <Plus size={14} /> Agregar actividad
         </Button>
+      </section>
+
+      {/* Resumen 1008 */}
+      <section>
+        <h3 className="text-sm font-semibold text-slate-700 mb-3">
+          Vista previa — Entrega de Fondos (1008)
+        </h3>
+        <Resumen1008Preview />
       </section>
 
       {/* Cuadre de Caja */}
