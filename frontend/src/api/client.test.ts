@@ -95,15 +95,13 @@ const minimalPayload: TesoreríaData = {
 
 describe("generateExcel", () => {
   beforeEach(() => {
-    vi.stubGlobal("URL", {
-      createObjectURL: vi.fn(() => "blob:mock-url"),
-      revokeObjectURL: vi.fn(),
-    });
+    vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:mock-url");
+    vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {});
     vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(() => {});
   });
 
   afterEach(() => {
-    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it("throws immediately when there is no auth token", async () => {
