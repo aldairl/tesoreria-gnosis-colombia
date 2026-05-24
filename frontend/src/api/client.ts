@@ -25,7 +25,7 @@ export async function login(
   const res = await fetch(`${BASE_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username: username.trim(), password: password.trim() }),
   });
 
   if (!res.ok) {

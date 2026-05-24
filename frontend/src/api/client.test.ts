@@ -44,6 +44,34 @@ describe("login", () => {
     expect(isAuthenticated()).toBe(true);
   });
 
+  it("sends trimmed username when there are surrounding spaces", async () => {
+    let capturedBody: { username?: string; password?: string } = {};
+
+    server.use(
+      http.post(`${API}/auth/login`, async ({ request }) => {
+        capturedBody = await request.json() as typeof capturedBody;
+        return HttpResponse.json({ token: "valid-jwt" });
+      })
+    );
+
+    await login("  admin  ", "secret");
+    expect(capturedBody.username).toBe("admin");
+  });
+
+  it("sends trimmed password when there are surrounding spaces", async () => {
+    let capturedBody: { username?: string; password?: string } = {};
+
+    server.use(
+      http.post(`${API}/auth/login`, async ({ request }) => {
+        capturedBody = await request.json() as typeof capturedBody;
+        return HttpResponse.json({ token: "valid-jwt" });
+      })
+    );
+
+    await login("admin", "  secret  ");
+    expect(capturedBody.password).toBe("secret");
+  });
+
   it("throws the detail message from the error response", async () => {
     server.use(
       http.post(`${API}/auth/login`, () =>
