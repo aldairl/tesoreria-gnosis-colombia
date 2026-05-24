@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { type FieldErrors, FormProvider, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Download, FileSpreadsheet, LogOut } from "lucide-react";
-import { generateExcel, clearToken } from "@/api/client";
+import { generateExcel, clearToken, isAuthenticated } from "@/api/client";
 import { useFormPersist } from "@/hooks/useFormPersist";
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, cn } from "@/components/ui";
 import { Step1Organizacion } from "@/components/steps/Step1Organizacion";
@@ -102,6 +102,10 @@ export function FormPage({ onLogout }: FormPageProps) {
       methods.reset(buildDefaultValues());
       setCurrentStep(1);
     } catch (e) {
+      if (!isAuthenticated()) {
+        onLogout();
+        return;
+      }
       setGenError(e instanceof Error ? e.message : "Error al generar");
     } finally {
       setGenerating(false);
